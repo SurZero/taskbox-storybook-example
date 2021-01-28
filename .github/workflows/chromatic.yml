@@ -1,0 +1,20 @@
+# name of our action
+name: 'Chromatic Deployment'
+# the event that will trigger the action
+on: push
+
+# what the job will do
+jobs:
+  test:
+    # the operating system it will run on
+    runs-on: ubuntu-latest
+    # the list of steps the action will go througn
+    steps:
+      - uses: actions/checkout@v1
+      - run: yarn
+      - uses: chromaui/action@v1
+      # option required to github chromatic action
+      with:
+        # our project token, to see how to obtain it
+        projectToken: project-token
+        token: ${{ secrets.GITHUB_TOKEN }}
